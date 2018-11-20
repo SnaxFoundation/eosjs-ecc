@@ -1,9 +1,12 @@
 {
-  "name": "snaxjs-ecc",
+  "name": "@snaxfoundation/snaxjs-ecc",
   "version": "4.0.5",
   "description": "Elliptic curve cryptography functions",
   "keywords": "ECC, Private Key, Public Key, Signature, AES, Encryption, Decryption",
   "main": "lib/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "README.md",
     "docs",

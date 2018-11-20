@@ -15,8 +15,8 @@ const ecc = require("@snaxfoundation/snaxjs-ecc");
 
 # Include
 
-- Install with: `npm install @snaxfoundation/snaxjs-ecc`
-- Html script tag, see [releases](https://github.com/SnaxFoundation/snaxjs-ecc/releases) for the correct **version** and its matching script **integrity** hash.
+-   Install with: `npm install @snaxfoundation/snaxjs-ecc`
+-   Html script tag, see [releases](https://github.com/SnaxFoundation/snaxjs-ecc/releases) for the correct **version** and its matching script **integrity** hash.
 
 ```html
 <html>
@@ -44,42 +44,42 @@ const ecc = require("@snaxfoundation/snaxjs-ecc");
 
 ### Table of Contents
 
-- [wif](#wif)
-- [ecc](#ecc)
-  - [initialize](#initialize)
-  - [unsafeRandomKey](#unsaferandomkey)
-  - [randomKey](#randomkey)
-    - [Parameters](#parameters)
-    - [Examples](#examples)
-  - [seedPrivate](#seedprivate)
-    - [Parameters](#parameters-1)
-    - [Examples](#examples-1)
-  - [privateToPublic](#privatetopublic)
-    - [Parameters](#parameters-2)
-    - [Examples](#examples-2)
-  - [isValidPublic](#isvalidpublic)
-    - [Parameters](#parameters-3)
-    - [Examples](#examples-3)
-  - [isValidPrivate](#isvalidprivate)
-    - [Parameters](#parameters-4)
-    - [Examples](#examples-4)
-  - [sign](#sign)
-    - [Parameters](#parameters-5)
-    - [Examples](#examples-5)
-  - [signHash](#signhash)
-    - [Parameters](#parameters-6)
-  - [verify](#verify)
-    - [Parameters](#parameters-7)
-    - [Examples](#examples-6)
-  - [recover](#recover)
-    - [Parameters](#parameters-8)
-    - [Examples](#examples-7)
-  - [recoverHash](#recoverhash)
-    - [Parameters](#parameters-9)
-  - [sha256](#sha256)
-    - [Parameters](#parameters-10)
-    - [Examples](#examples-8)
-- [pubkey](#pubkey)
+-   [wif](#wif)
+-   [pubkey](#pubkey)
+-   [ecc](#ecc)
+    -   [initialize](#initialize)
+    -   [unsafeRandomKey](#unsaferandomkey)
+    -   [randomKey](#randomkey)
+        -   [Parameters](#parameters)
+        -   [Examples](#examples)
+    -   [seedPrivate](#seedprivate)
+        -   [Parameters](#parameters-1)
+        -   [Examples](#examples-1)
+    -   [privateToPublic](#privatetopublic)
+        -   [Parameters](#parameters-2)
+        -   [Examples](#examples-2)
+    -   [isValidPublic](#isvalidpublic)
+        -   [Parameters](#parameters-3)
+        -   [Examples](#examples-3)
+    -   [isValidPrivate](#isvalidprivate)
+        -   [Parameters](#parameters-4)
+        -   [Examples](#examples-4)
+    -   [sign](#sign)
+        -   [Parameters](#parameters-5)
+        -   [Examples](#examples-5)
+    -   [signHash](#signhash)
+        -   [Parameters](#parameters-6)
+    -   [verify](#verify)
+        -   [Parameters](#parameters-7)
+        -   [Examples](#examples-6)
+    -   [recover](#recover)
+        -   [Parameters](#parameters-8)
+        -   [Examples](#examples-7)
+    -   [recoverHash](#recoverhash)
+        -   [Parameters](#parameters-9)
+    -   [sha256](#sha256)
+        -   [Parameters](#parameters-10)
+        -   [Examples](#examples-8)
 
 ## wif
 
@@ -87,17 +87,23 @@ const ecc = require("@snaxfoundation/snaxjs-ecc");
 
 Type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)
 
+## pubkey
+
+SNAXKey..
+
+Type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)
+
 ## ecc
 
 ### initialize
 
-Initialize by running some self-checking code. This should take a
+Initialize by running some self-checking code.  This should take a
 second to gather additional CPU entropy used during private key
 generation.
 
 Initialization happens once even if called multiple times.
 
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)**
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
 
 ### unsafeRandomKey
 
@@ -109,63 +115,63 @@ Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 
 #### Parameters
 
-- `cpuEntropyBits` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** gather additional entropy
-  from a CPU mining algorithm. This will already happen once by
-  default. (optional, default `0`)
+-   `cpuEntropyBits` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** gather additional entropy
+    from a CPU mining algorithm.  This will already happen once by
+    default. (optional, default `0`)
 
 #### Examples
 
 ```javascript
 ecc.randomKey().then(privateKey => {
-  console.log("Private Key:\t", privateKey); // wif
-  console.log("Public Key:\t", ecc.privateToPublic(privateKey)); // SNAXkey...
-});
+console.log('Private Key:\t', privateKey) // wif
+console.log('Public Key:\t', ecc.privateToPublic(privateKey)) // SNAXkey...
+})
 ```
 
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[wif](#wif)>**
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[wif](#wif)>** 
 
 ### seedPrivate
 
 #### Parameters
 
-- `seed` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** any length string. This is private. The same
-  seed produces the same private key every time. At least 128 random
-  bits should be used to produce a good private key.
+-   `seed` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** any length string.  This is private.  The same
+    seed produces the same private key every time.  At least 128 random
+    bits should be used to produce a good private key.
 
 #### Examples
 
 ```javascript
-ecc.seedPrivate("secret") === wif;
+ecc.seedPrivate('secret') === wif
 ```
 
-Returns **[wif](#wif)**
+Returns **[wif](#wif)** 
 
 ### privateToPublic
 
 #### Parameters
 
-- `wif` **[wif](#wif)**
-- `pubkey_prefix` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** public key prefix (optional, default `'SNAX'`)
+-   `wif` **[wif](#wif)** 
+-   `pubkey_prefix` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** public key prefix (optional, default `'SNAX'`)
 
 #### Examples
 
 ```javascript
-ecc.privateToPublic(wif) === pubkey;
+ecc.privateToPublic(wif) === pubkey
 ```
 
-Returns **[pubkey](#pubkey)**
+Returns **[pubkey](#pubkey)** 
 
 ### isValidPublic
 
 #### Parameters
 
-- `pubkey` **[pubkey](#pubkey)** like SNAXKey..
-- `pubkey_prefix` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** (optional, default `'SNAX'`)
+-   `pubkey` **[pubkey](#pubkey)** like SNAXKey..
+-   `pubkey_prefix` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**  (optional, default `'SNAX'`)
 
 #### Examples
 
 ```javascript
-ecc.isValidPublic(pubkey) === true;
+ecc.isValidPublic(pubkey) === true
 ```
 
 Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** valid
@@ -174,12 +180,12 @@ Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 
 #### Parameters
 
-- `wif` **[wif](#wif)**
+-   `wif` **[wif](#wif)** 
 
 #### Examples
 
 ```javascript
-ecc.isValidPrivate(wif) === true;
+ecc.isValidPrivate(wif) === true
 ```
 
 Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** valid
@@ -190,14 +196,14 @@ Create a signature using data or a hash.
 
 #### Parameters
 
-- `data` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Buffer](https://nodejs.org/api/buffer.html))**
-- `privateKey` **([wif](#wif) | PrivateKey)**
-- `encoding` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** data encoding (if string) (optional, default `'utf8'`)
+-   `data` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Buffer](https://nodejs.org/api/buffer.html))** 
+-   `privateKey` **([wif](#wif) | PrivateKey)** 
+-   `encoding` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** data encoding (if string) (optional, default `'utf8'`)
 
 #### Examples
 
 ```javascript
-ecc.sign("I am alive", wif);
+ecc.sign('I am alive', wif)
 ```
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** string signature
@@ -206,9 +212,9 @@ Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 #### Parameters
 
-- `dataSha256` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Buffer](https://nodejs.org/api/buffer.html))** sha256 hash 32 byte buffer or string
-- `privateKey` **([wif](#wif) | PrivateKey)**
-- `encoding` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** dataSha256 encoding (if string) (optional, default `'hex'`)
+-   `dataSha256` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Buffer](https://nodejs.org/api/buffer.html))** sha256 hash 32 byte buffer or string
+-   `privateKey` **([wif](#wif) | PrivateKey)** 
+-   `encoding` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** dataSha256 encoding (if string) (optional, default `'hex'`)
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** string signature
 
@@ -218,19 +224,19 @@ Verify signed data.
 
 #### Parameters
 
-- `signature` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Buffer](https://nodejs.org/api/buffer.html))** buffer or hex string
-- `data` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Buffer](https://nodejs.org/api/buffer.html))**
-- `pubkey` **([pubkey](#pubkey) | PublicKey)**
-- `encoding` (optional, default `'utf8'`)
-- `hashData` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** sha256 hash data before verify (optional, default `true`)
+-   `signature` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Buffer](https://nodejs.org/api/buffer.html))** buffer or hex string
+-   `data` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Buffer](https://nodejs.org/api/buffer.html))** 
+-   `pubkey` **([pubkey](#pubkey) | PublicKey)** 
+-   `encoding`   (optional, default `'utf8'`)
+-   `hashData` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** sha256 hash data before verify (optional, default `true`)
 
 #### Examples
 
 ```javascript
-ecc.verify(signature, "I am alive", pubkey) === true;
+ecc.verify(signature, 'I am alive', pubkey) === true
 ```
 
-Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)**
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
 
 ### recover
 
@@ -238,53 +244,47 @@ Recover the public key used to create the signature.
 
 #### Parameters
 
-- `signature` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Buffer](https://nodejs.org/api/buffer.html))** (SNAXbase58sig.., Hex, Buffer)
-- `data` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Buffer](https://nodejs.org/api/buffer.html))** full data
-- `encoding` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** data encoding (if data is a string) (optional, default `'utf8'`)
+-   `signature` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Buffer](https://nodejs.org/api/buffer.html))** (SNAXbase58sig.., Hex, Buffer)
+-   `data` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Buffer](https://nodejs.org/api/buffer.html))** full data
+-   `encoding` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** data encoding (if data is a string) (optional, default `'utf8'`)
 
 #### Examples
 
 ```javascript
-ecc.recover(signature, "I am alive") === pubkey;
+ecc.recover(signature, 'I am alive') === pubkey
 ```
 
-Returns **[pubkey](#pubkey)**
+Returns **[pubkey](#pubkey)** 
 
 ### recoverHash
 
 #### Parameters
 
-- `signature` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Buffer](https://nodejs.org/api/buffer.html))** (SNAXbase58sig.., Hex, Buffer)
-- `dataSha256` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Buffer](https://nodejs.org/api/buffer.html))** sha256 hash 32 byte buffer or hex string
-- `encoding` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** dataSha256 encoding (if dataSha256 is a string) (optional, default `'hex'`)
+-   `signature` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Buffer](https://nodejs.org/api/buffer.html))** (SNAXbase58sig.., Hex, Buffer)
+-   `dataSha256` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Buffer](https://nodejs.org/api/buffer.html))** sha256 hash 32 byte buffer or hex string
+-   `encoding` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** dataSha256 encoding (if dataSha256 is a string) (optional, default `'hex'`)
 
-Returns **PublicKey**
+Returns **PublicKey** 
 
 ### sha256
 
 #### Parameters
 
-- `data` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Buffer](https://nodejs.org/api/buffer.html))** always binary, you may need Buffer.from(data, 'hex')
-- `resultEncoding` (optional, default `'hex'`)
-- `encoding` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** result encoding 'hex', 'binary' or 'base64' (optional, default `'hex'`)
+-   `data` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Buffer](https://nodejs.org/api/buffer.html))** always binary, you may need Buffer.from(data, 'hex')
+-   `resultEncoding`   (optional, default `'hex'`)
+-   `encoding` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** result encoding 'hex', 'binary' or 'base64' (optional, default `'hex'`)
 
 #### Examples
 
 ```javascript
-ecc.sha256("hashme") === "02208b..";
+ecc.sha256('hashme') === '02208b..'
 ```
 
 ```javascript
-ecc.sha256(Buffer.from("02208b", "hex")) === "29a23..";
+ecc.sha256(Buffer.from('02208b', 'hex')) === '29a23..'
 ```
 
 Returns **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Buffer](https://nodejs.org/api/buffer.html))** Buffer when encoding is null, or string
-
-## pubkey
-
-SNAXKey..
-
-Type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)
 
 # Usage (Object API)
 
@@ -308,12 +308,12 @@ pubkey = PrivateKey.fromString(privateWif)
   .toString();
 ```
 
-- [PrivateKey](./src/key_private.js)
-- [PublicKey](./src/key_public.js)
-- [Signature](./src/signature.js)
-- [Aes](./src/aes.js)
-- [key_utils](./src/key_utils.js)
-- [config](./src/config.js)
+-   [PrivateKey](./src/key_private.js)
+-   [PublicKey](./src/key_public.js)
+-   [Signature](./src/signature.js)
+-   [Aes](./src/aes.js)
+-   [key_utils](./src/key_utils.js)
+-   [config](./src/config.js)
 
 # Browser
 
